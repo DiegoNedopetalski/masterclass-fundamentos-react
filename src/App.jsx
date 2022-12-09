@@ -10,6 +10,7 @@ import CondicionalComIf from './components/basicos/CondicionalComIf'
 import './App.css'
 import Pai from './components/comunicacao/direta/Pai'
 import Super from './components/comunicacao/indireta/Super'
+import Input from './components/form/Input'
 
 export default function App(props) {
     return (
@@ -48,6 +49,9 @@ export default function App(props) {
             </Card>
             <Card titulo="#08 - Comunicação Indireta" color="#29a8ab" >
                 <Super/>
+            </Card>
+            <Card titulo="#09 - Input" color="#ff3377" >
+                <Input/>
             </Card>
         </div>
     )
