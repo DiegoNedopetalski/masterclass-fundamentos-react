@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default class MegaSena extends React.Component {
+export default function MegaSena(props) {
+    const [numeros, setNumeros] = useState(Array(props.qtdNumeros).fill(0))
 
-    constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
-        this.state = { random: 0 }
+    function gerarNumerosNaoContido(array) {
+        const novoNumero = parseInt(Math.random() * (60 - 1)) + 1
+        return array.includes(novoNumero) 
+            ? gerarNumerosNaoContido(array) : novoNumero
     }
 
-    handleClick() {
-        let min = 1
-        let max = 60
-        var rand = min + Math.random() * (max - min)
-        this.setState({ random: this.state.random + rand })
+    function gerarNumeros() {
+        const novoArray = Array(props.qtdNumeros)
+            .fill(0)
+            .reduce((a) => {
+                return [...a, gerarNumerosNaoContido(a)]
+            }, [])
+            .sort((a, b) => a - b)
+        setNumeros(novoArray)
     }
 
-    render() {
-        return (
-            <div>
-
-                <button>Oi</button>
-            </div>
-        )
-    }
+    return (
+        <>
+            <h3>Mega</h3>
+            <h4>{numeros.join(' ')}</h4>
+            <button onClick={gerarNumeros}>Gerar Número</button>
+        </>
+    )
 }
